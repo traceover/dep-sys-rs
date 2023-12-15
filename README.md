@@ -15,7 +15,7 @@ Circular dependency detected between Chicken and Egg
 To sort a graph:
 
 ```console
-$ cargo run -- check abc.dot
+$ cargo run -- sort abc.dot
 C
 B
 A
