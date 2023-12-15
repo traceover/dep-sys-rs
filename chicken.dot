@@ -1,0 +1,4 @@
+digraph {
+    Chicken -> Egg
+    Egg -> Chicken
+}
