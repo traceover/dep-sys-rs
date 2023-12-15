@@ -157,12 +157,12 @@ fn main() -> ExitCode {
             let items = from_graphviz(&graph);
 
             if let Some((a, b)) = detect_cycle(&items) {
-                eprintln!("ERROR: Cycle detected between {} and {}.", items[a].data, items[b].data);
-                ExitCode::FAILURE
+                eprintln!("Circular dependency detected between {} and {}", items[a].data, items[b].data);
             } else {
-                println!("INFO: The graph has no cycles.");
-                ExitCode::SUCCESS
+                println!("The graph has no circular dependencies");
             }
+
+            ExitCode::SUCCESS
         },
         Command::Sort { input_path } => {
             let contents = fs::read_to_string(input_path).unwrap();
@@ -171,7 +171,8 @@ fn main() -> ExitCode {
             let items = from_graphviz(&graph);
 
             if let Some((a, b)) = detect_cycle(&items) {
-                eprintln!("ERROR: Cycle detected between {} and {}.", *items[a], *items[b]);
+                eprintln!("ERROR: Circular dependency detected between {} and {}", *items[a], *items[b]);
+                eprintln!("           Cannot sort a graph with cycles");
                 return ExitCode::FAILURE;
             }
 
